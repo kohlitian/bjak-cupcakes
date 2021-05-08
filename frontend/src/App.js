@@ -4,6 +4,7 @@ import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signOut } from './actions/userActions';
 import CartScreen from './Screens/CartScreen';
 import HomeScreen from './Screens/HomeScreen';
+import RegisterScreen from './Screens/RegisterScreen';
 import SigninScreen from './Screens/SigninScreen';
 
 function App() {
@@ -56,7 +57,9 @@ function App() {
                                     {userInfo.name}{' '}
                                     <i className="fa fa-caret-down"></i>
                                 </Link>
-                                <ul className="dropdown-content">
+                                <ul
+                                    className={`dropdown-content ${headerActive}`}
+                                >
                                     <Link
                                         to="#signout"
                                         onClick={signoutHandler}
@@ -74,6 +77,7 @@ function App() {
                     <Route path="/" exact component={HomeScreen} />
                     <Route path="/cart/:id?" component={CartScreen} />
                     <Route path="/signin" component={SigninScreen} />
+                    <Route path="/register" component={RegisterScreen} />
                 </main>
                 <footer className="row center">All right reserved</footer>
             </div>
