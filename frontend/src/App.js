@@ -1,12 +1,28 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import HomeScreen from './Screens/HomeScreen';
 
 function App() {
+    const [headerActive, setHeaderActive] = useState('');
+
+    const handleScroll = () => {
+        if (document.documentElement.scrollTop > 1) {
+            setHeaderActive('active');
+        } else {
+            setHeaderActive('');
+        }
+    };
+
+    useEffect(() => {
+        window.onscroll = () => {
+            handleScroll();
+        };
+    }, []);
+
     return (
         <BrowserRouter>
             <div className="grid-container">
-                <header className="row">
+                <header className={`row ${headerActive}`}>
                     <div>
                         <a className="brand" href="/">
                             CupCakes
