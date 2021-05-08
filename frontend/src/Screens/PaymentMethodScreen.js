@@ -21,7 +21,11 @@ export default function PaymentMethodScreen(props) {
     return (
         <div>
             <CheckoutSteps step1 step2 step3 />
-            <form onSubmit={submitHandler} className="form">
+            <form
+                onSubmit={submitHandler}
+                className="form card card-body"
+                style={{ marginTop: '2rem' }}
+            >
                 <div>
                     <h1>Payment Method</h1>
                 </div>
@@ -49,7 +53,7 @@ export default function PaymentMethodScreen(props) {
                         />
                         <label htmlFor="paypal">Stripe</label>
                     </div>
-                    <div>
+                    <div style={{ marginTop: '3rem' }}>
                         <button className="primary block" type="submit">
                             Continue
                         </button>

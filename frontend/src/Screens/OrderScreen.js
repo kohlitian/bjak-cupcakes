@@ -74,7 +74,8 @@ export default function OrderScreen(props) {
                                 </p>
                                 {order.isDelivered ? (
                                     <MessageBox variant="success">
-                                        Deliveted at {order.deliveredAt}
+                                        Deliveted at{' '}
+                                        {order.deliveredAt.substring(0, 10)}
                                     </MessageBox>
                                 ) : (
                                     <MessageBox variant="danger">
@@ -110,6 +111,7 @@ export default function OrderScreen(props) {
                                                     {item.qty * item.price}
                                                 </div>
                                             </div>
+                                            <hr />
                                         </li>
                                     ))}
                                 </ul>
@@ -126,7 +128,7 @@ export default function OrderScreen(props) {
                             </p>
                             {order.isPaid ? (
                                 <MessageBox variant="success">
-                                    Paid at {order.paidAt}
+                                    Paid at {order.paidAt.substring(0, 10)}
                                 </MessageBox>
                             ) : (
                                 <MessageBox variant="danger">

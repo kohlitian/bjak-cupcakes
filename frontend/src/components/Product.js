@@ -1,9 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addToCart } from '../actions/cartActions';
 
 export default function Product(props) {
-    const { product } = props;
-
+    const { product, isAdmin } = props;
+    const dispatch = useDispatch();
     return (
         <div key={product._id} className="card">
             <img className="medium" src={product.image} alt={product.name} />
@@ -17,11 +19,21 @@ export default function Product(props) {
             </div>
             {product.countInStock > 0 && (
                 <div className="card-add-button">
-                    <button className="card-add-cart-button">
+                    <button
+                        onClick={() => dispatch(addToCart(product._id, 1))}
+                        disabled={isAdmin}
+                        className="card-add-cart-button"
+                    >
                         <i className="fa fa-shopping-bag"></i>
                     </button>
                     <button className="card-add-buy-button">
-                        <Link to={`/cart/${product._id}`}>Buy Now</Link>
+                        {isAdmin ? (
+                            <Link to={`/productupdate/${product._id}`}>
+                                Edit
+                            </Link>
+                        ) : (
+                            <Link to={`/cart/${product._id}`}>Buy Now</Link>
+                        )}
                     </button>
                 </div>
             )}

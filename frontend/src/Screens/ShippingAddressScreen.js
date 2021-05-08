@@ -5,27 +5,46 @@ import CheckoutSteps from '../components/CheckoutSteps';
 
 export default function ShippingAddressScreen(props) {
     const userSignin = useSelector((state) => state.userSignin);
-    const { userInfo } = userSignin;
     const cart = useSelector((state) => state.cart);
-    const { shippingAddress } = cart;
-
+    const { userInfo } = userSignin;
     if (!userInfo) {
         props.history.push('/signin');
     }
+
     const [fullName, setFullName] = useState(
-        shippingAddress?.fullName ? shippingAddress.fullName : ''
+        userInfo?.fullName
+            ? userInfo.fullName
+            : cart.shippingAddress?.fullName
+            ? cart.shippingAddress.fullName
+            : ''
     );
     const [address, setAddress] = useState(
-        shippingAddress?.address ? shippingAddress.address : ''
+        userInfo?.address
+            ? userInfo.address
+            : cart.shippingAddress.address
+            ? cart.shippingAddress.address
+            : ''
     );
     const [city, setCity] = useState(
-        shippingAddress?.city ? shippingAddress.city : ''
+        userInfo?.city
+            ? userInfo.city
+            : cart.shippingAddress.city
+            ? cart.shippingAddress.city
+            : ''
     );
     const [postalCode, setPostalCode] = useState(
-        shippingAddress?.postalCode ? shippingAddress.postalCode : ''
+        userInfo?.postalCode
+            ? userInfo.postalCode
+            : cart.shippingAddress.postalCode
+            ? cart.shippingAddress.postalCode
+            : ''
     );
     const [country, setCountry] = useState(
-        shippingAddress?.country ? shippingAddress.country : ''
+        userInfo?.country
+            ? userInfo.country
+            : cart.shippingAddress.country
+            ? cart.shippingAddress.country
+            : ''
     );
     const dispatch = useDispatch();
 
@@ -46,7 +65,11 @@ export default function ShippingAddressScreen(props) {
     return (
         <div>
             <CheckoutSteps step1 step2 />
-            <form onSubmit={submitHandler} className="form">
+            <form
+                onSubmit={submitHandler}
+                className="form card card-body"
+                style={{ marginTop: '2rem' }}
+            >
                 <div>
                     <h1>Shipping Address</h1>
                 </div>

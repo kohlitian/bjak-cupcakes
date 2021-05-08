@@ -30,7 +30,7 @@ export default function SigninScreen(props) {
 
     return (
         <div>
-            <form onSubmit={submitHandler} className="form">
+            <form onSubmit={submitHandler} className="form card card-body">
                 <div>
                     <h1>Sign In</h1>
                 </div>

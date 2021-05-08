@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProducts } from '../actions/productActions';
 
 export default function HomeScreen() {
+    const userSignin = useSelector((state) => state.userSignin);
+    const { userInfo } = userSignin;
     const productList = useSelector((state) => state.productList);
     const { products, loading, error } = productList;
 
@@ -24,7 +26,11 @@ export default function HomeScreen() {
             ) : (
                 <div className="row center">
                     {products.map((product) => (
-                        <Product key={product._id} product={product} />
+                        <Product
+                            key={product._id}
+                            product={product}
+                            isAdmin={userInfo ? userInfo.isAdmin : false}
+                        />
                     ))}
                 </div>
             )}

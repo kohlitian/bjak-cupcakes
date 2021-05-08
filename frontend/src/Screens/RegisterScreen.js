@@ -36,7 +36,7 @@ export default function RegisterScreen(props) {
 
     return (
         <div>
-            <form onSubmit={submitHandler} className="form">
+            <form onSubmit={submitHandler} className="form card card-body">
                 <div>
                     <h1>Register</h1>
                 </div>

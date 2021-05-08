@@ -1,3 +1,7 @@
+/* words - 686ab1*/
+/* button - 9293be*/
+/* background - f7b5c3*/
+
 html {
     font-size: 62.5%;
     box-sizing: border-box;
@@ -10,7 +14,7 @@ body {
     font-family: Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: #f8f8f8;
+    background-color: #f7b5c3;
 }
 
 #root {
@@ -32,6 +36,11 @@ header {
     background-color: none;
 }
 
+header:hover {
+    box-shadow: 0 5px 15px #888888;
+    background-color: #ffffff;
+}
+
 header.active {
     position: fixed;
     box-shadow: 0 5px 15px #888888;
@@ -48,7 +57,7 @@ main {
 }
 
 footer {
-    color: #491904;
+    color: #686ab1;
     grid-area: footer;
     background-color: #ffffff;
     font-weight: bold;
@@ -124,19 +133,31 @@ button {
 }
 
 button {
-    background-color: #f8f8f8;
+    background-color: #9293be;
     cursor: pointer;
     opacity: 0.8;
+    color: #ffffff;
 }
 
 button.primary {
-    background-color: #74350b;
+    background-color: #9293be;
     color: #ffffff;
     border-radius: none;
 }
 
 button.block {
     width: 100%;
+}
+
+button.small {
+    font-size: 1.2rem;
+}
+
+button.remove {
+    background-color: #e98080;
+    color: #ffffff;
+    border: none;
+    border-radius: none;
 }
 
 input:hover,
@@ -149,18 +170,19 @@ button:hover {
 /* header */
 
 header a {
-    color: #491904;
+    color: #686ab1;
     padding: 1rem;
+    font-weight: 600;
 }
 
 a.brand {
-    color: #491904;
+    color: #686ab1;
     font-size: 3rem;
     font-weight: bold;
 }
 
 .badge {
-    background-color: #f02020;
+    background-color: #e98080;
     color: #ffffff;
     border-radius: 50%;
     padding: 0.2rem 0.7rem;
@@ -187,11 +209,12 @@ img.medium {
 /* Card */
 
 .card {
-    border: 0.1rem #c0c0c0 solid;
+    border: none;
     background-color: #ffffff;
     border-radius: 0.5rem;
     margin: 1rem;
     overflow: hidden;
+    box-shadow: 0 5px 15px #888888;
 }
 
 .card-body {
@@ -208,11 +231,11 @@ img.medium {
 }
 
 .card-body .countInStock {
-    color: #491904;
+    color: #686ab1;
 }
 
 .card-body .price {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
 }
 
 .card-add-button {
@@ -228,7 +251,7 @@ img.medium {
     background-color: #ffffff;
     border: none;
     font-size: 1.6rem;
-    color: #74350b;
+    color: #9293be;
     opacity: 0.8;
     border-radius: 0;
 }
@@ -241,7 +264,7 @@ img.medium {
 .card-add-buy-button {
     width: 100%;
     height: 100%;
-    background-color: #74350b;
+    background-color: #9293be;
     border: none;
     opacity: 0.8;
     border-radius: 0;
@@ -344,10 +367,8 @@ img.medium {
     margin-top: 0.4rem;
     border-radius: 0.5rem;
     text-align: right;
-}
-
-.dropdown-content.active {
     background-color: #ffffff;
+    box-shadow: 0 5px 15px #888888;
 }
 
 .dropdown:hover .dropdown-content {
@@ -365,6 +386,28 @@ img.medium {
 }
 
 .checkout-steps > div.active {
-    border-top-color: #74350b;
-    color: #74350b;
+    border-top-color: #686ab1;
+    color: #686ab1;
+}
+
+/* Table */
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table tbody tr:nth-of-type(odd) {
+    background-color: #f4f4f4;
+}
+
+.table td,
+.table th {
+    text-align: left;
+    border: 0.1rem solid #e4e4e4;
+    padding: 0.5rem;
+}
+
+.table button {
+    margin: 0 0.2rem;
 }

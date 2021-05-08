@@ -80,6 +80,7 @@ export default function PlaceOrderScreen(props) {
                                                     {item.qty * item.price}
                                                 </div>
                                             </div>
+                                            <hr />
                                         </li>
                                     ))}
                                 </ul>
@@ -137,6 +138,7 @@ export default function PlaceOrderScreen(props) {
                             <MessageBox variant="danger">{error}</MessageBox>
                         )}
                         <button
+                            style={{ margin: '0' }}
                             type="button"
                             onClick={placeOrderHandler}
                             className="primary block"

@@ -2,11 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signOut } from './actions/userActions';
+import PrivateRoute from './components/PrivateRoute';
 import CartScreen from './Screens/CartScreen';
 import HomeScreen from './Screens/HomeScreen';
+import OrderHistoryScreen from './Screens/OrderHistoryScreen';
 import OrderScreen from './Screens/OrderScreen';
 import PaymentMethodScreen from './Screens/PaymentMethodScreen';
 import PlaceOrderScreen from './Screens/PlaceOrderScreen';
+import ProfileScreen from './Screens/ProfileScreen';
 import RegisterScreen from './Screens/RegisterScreen';
 import ShippingAddressScreen from './Screens/ShippingAddressScreen';
 import SigninScreen from './Screens/SigninScreen';
@@ -61,19 +64,48 @@ function App() {
                                     {userInfo.name}{' '}
                                     <i className="fa fa-caret-down"></i>
                                 </Link>
-                                <ul
-                                    className={`dropdown-content ${headerActive}`}
-                                >
-                                    <Link
-                                        to="#signout"
-                                        onClick={signoutHandler}
-                                    >
-                                        Sign Out
-                                    </Link>
+                                <ul className="dropdown-content">
+                                    <li>
+                                        <Link to="/profile">User Profile</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/orderhistory">
+                                            My Orders
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link
+                                            to="#signout"
+                                            onClick={signoutHandler}
+                                        >
+                                            Sign Out
+                                        </Link>
+                                    </li>
                                 </ul>
                             </div>
                         ) : (
                             <Link to="/signin">Sign In</Link>
+                        )}
+                        {userInfo && userInfo.isAdmin && (
+                            <div className="dropdown">
+                                <Link to="#admin">
+                                    Admin <i className="fa fa-caret-down"></i>
+                                </Link>
+                                <ul className="dropdown-content">
+                                    <li>
+                                        <Link to="/dashboard">Dashboard</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/dashboard">Products</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/dashboard">Orders</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/dashboard">Users</Link>
+                                    </li>
+                                </ul>
+                            </div>
                         )}
                     </div>
                 </header>
@@ -83,9 +115,20 @@ function App() {
                     <Route path="/signin" component={SigninScreen} />
                     <Route path="/register" component={RegisterScreen} />
                     <Route path="/shipping" component={ShippingAddressScreen} />
-                    <Route path="/payment" component={PaymentMethodScreen} />
-                    <Route path="/placeorder" component={PlaceOrderScreen} />
-                    <Route path="/order/:id" component={OrderScreen} />
+                    <PrivateRoute
+                        path="/payment"
+                        component={PaymentMethodScreen}
+                    />
+                    <PrivateRoute
+                        path="/placeorder"
+                        component={PlaceOrderScreen}
+                    />
+                    <PrivateRoute path="/order/:id" component={OrderScreen} />
+                    <PrivateRoute path="/profile" component={ProfileScreen} />
+                    <PrivateRoute
+                        path="/orderhistory"
+                        component={OrderHistoryScreen}
+                    />
                 </main>
                 <footer className="row center">All right reserved</footer>
             </div>
