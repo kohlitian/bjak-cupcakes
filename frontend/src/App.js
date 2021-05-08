@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { BrowserRouter, Link, Route } from 'react-router-dom';
+import CartScreen from './Screens/CartScreen';
 import HomeScreen from './Screens/HomeScreen';
 
 function App() {
     const [headerActive, setHeaderActive] = useState('');
+    const cart = useSelector((state) => state.cart);
+    const { cartItems } = cart;
 
     const handleScroll = () => {
         if (document.documentElement.scrollTop > 1) {
@@ -24,17 +28,25 @@ function App() {
             <div className="grid-container">
                 <header className={`row ${headerActive}`}>
                     <div>
-                        <a className="brand" href="/">
+                        <Link className="brand" to="/">
                             CupCakes
-                        </a>
+                        </Link>
                     </div>
                     <div>
-                        <a href="/cart">Cart</a>
-                        <a href="/signin">Sign In</a>
+                        <Link to="/cart">
+                            Cart{' '}
+                            {cartItems.length > 0 && (
+                                <span className="badge">
+                                    {cartItems.length}
+                                </span>
+                            )}
+                        </Link>
+                        <Link to="/signin">Sign In</Link>
                     </div>
                 </header>
                 <main>
                     <Route path="/" exact component={HomeScreen} />
+                    <Route path="/cart/:id?" component={CartScreen} />
                 </main>
                 <footer className="row center">All right reserved</footer>
             </div>

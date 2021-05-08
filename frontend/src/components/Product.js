@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Product(props) {
     const { product } = props;
@@ -14,12 +15,16 @@ export default function Product(props) {
                 </div>
                 <div className="desc">{product.description}</div>
             </div>
-            <div className="card-add-button">
-                <button className="card-add-cart-button">
-                    <i className="fa fa-shopping-bag"></i>
-                </button>
-                <button className="card-add-buy-button">Buy Now</button>
-            </div>
+            {product.countInStock > 0 && (
+                <div className="card-add-button">
+                    <button className="card-add-cart-button">
+                        <i className="fa fa-shopping-bag"></i>
+                    </button>
+                    <button className="card-add-buy-button">
+                        <Link to={`/cart/${product._id}`}>Buy Now</Link>
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
