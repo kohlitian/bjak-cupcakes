@@ -5,12 +5,14 @@ const data = {
         {
             name: 'Li Tian',
             email: 'litian@gmail.com',
+            phone: '0123334444',
             password: bcrypt.hashSync('123456', 8),
             isAdmin: true,
         },
         {
             name: 'armin',
             email: 'armin@gmail.com',
+            phone: '0167789010',
             password: bcrypt.hashSync('123456', 8),
             isAdmin: false,
         },
@@ -22,6 +24,7 @@ const data = {
             price: 10,
             countInStock: 100,
             description: 'Fresh Strawberry mixed with Best Chocolate',
+            category: 'Strawberry',
         },
         {
             name: 'Chocolate Oreo Cupcakes ',
@@ -29,6 +32,7 @@ const data = {
             price: 5,
             countInStock: 10,
             description: 'Double Sweet Double Fun',
+            category: 'Chocolate',
         },
         {
             name: 'Chocolate Cupcakes ',
@@ -36,6 +40,7 @@ const data = {
             price: 9,
             countInStock: 20,
             description: 'Best Chocolate for the Best of U',
+            category: 'Chocolate',
         },
         {
             name: 'Pumpkin Cupcakes ',
@@ -43,6 +48,7 @@ const data = {
             price: 12,
             countInStock: 3,
             description: 'Pumpkin Lovers must Try!',
+            category: 'Pumpkin',
         },
         {
             name: 'Banana with Cream Cupcakes ',
@@ -50,6 +56,7 @@ const data = {
             price: 5,
             countInStock: 30,
             description: '',
+            category: 'Banana',
         },
         {
             name: 'BlueBerry Cupcakes ',
@@ -57,6 +64,7 @@ const data = {
             price: 7,
             countInStock: 0,
             description: 'BlueBerry is da Best',
+            category: 'Blueberry',
         },
     ],
 };
