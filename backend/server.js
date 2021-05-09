@@ -30,9 +30,14 @@ app.get('/api/config/paypal', (req, res) => {
 const __dirname = path.resolve();
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')));
 
-app.get('/', (req, res) => {
-    res.send('server is ready');
-});
+app.use(express.static(path.join(__dirname, '/frontend/build')));
+app.get('*', (req, res) =>
+    res.send(path.join(__dirname, '/frontend/build/index.html'))
+);
+
+// app.get('/', (req, res) => {
+//     res.send('server is ready');
+// });
 
 app.use((err, req, res, next) => {
     res.status(500).send({ message: err.message });
