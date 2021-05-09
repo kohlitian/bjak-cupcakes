@@ -35,13 +35,17 @@ export const signin = (email, password) => async (dispatch) => {
     }
 };
 
-export const register = (name, email, password) => async (dispatch) => {
-    dispatch({ type: USER_REGISTER_REQUEST, payload: { email, password } });
+export const register = (name, email, password, phone) => async (dispatch) => {
+    dispatch({
+        type: USER_REGISTER_REQUEST,
+        payload: { email, password, name, phone },
+    });
     try {
         const { data } = await Axios.post('/api/users/register', {
             name,
             email,
             password,
+            phone,
         });
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
         dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
@@ -71,7 +75,7 @@ export const detailsUser = (userId) => async (dispatch, getState) => {
     } = getState();
     try {
         const { data } = await Axios.get(`/api/users/${userId}`, {
-            headers: { authorization: `Bearer ${userInfo.token}` },
+            headers: { authorization: `Bearer ${userInfo?.token}` },
         });
         dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
     } catch (error) {

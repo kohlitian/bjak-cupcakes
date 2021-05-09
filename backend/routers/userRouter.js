@@ -26,6 +26,7 @@ userRouter.post(
                     _id: user._id,
                     name: user.name,
                     email: user.email,
+                    phone: user.phone,
                     address: user.address,
                     city: user.city,
                     country: user.country,
@@ -46,6 +47,7 @@ userRouter.post(
         const user = new User({
             name: req.body.name,
             email: req.body.email,
+            phone: req.body.phone,
             password: bcrypt.hashSync(req.body.password, 8),
         });
         const createdUser = await user.save();
@@ -53,6 +55,7 @@ userRouter.post(
             _id: createdUser._id,
             name: createdUser.name,
             email: createdUser.email,
+            phone: createdUser.phone,
             address: createdUser.address,
             city: createdUser.city,
             country: createdUser.country,
@@ -83,6 +86,7 @@ userRouter.put(
         if (user) {
             user.name = req.body.name || user.name;
             user.email = req.body.email || user.email;
+            user.phone = req.body.phone || user.phone;
             user.address = req.body.address;
             user.city = req.body.city;
             user.country = req.body.country;
@@ -95,6 +99,7 @@ userRouter.put(
                 _id: updatedUser._id,
                 name: updatedUser.name,
                 email: updatedUser.email,
+                phone: updatedUser.phone,
                 address: updatedUser.address,
                 city: updatedUser.city,
                 country: updatedUser.country,
