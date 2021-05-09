@@ -8,6 +8,7 @@ import CartScreen from './Screens/CartScreen';
 import CreateProductScreen from './Screens/CreateProductScreen';
 import HomeScreen from './Screens/HomeScreen';
 import OrderHistoryScreen from './Screens/OrderHistoryScreen';
+import OrderListScreen from './Screens/OrderListScreen';
 import OrderScreen from './Screens/OrderScreen';
 import PaymentMethodScreen from './Screens/PaymentMethodScreen';
 import PlaceOrderScreen from './Screens/PlaceOrderScreen';
@@ -102,18 +103,15 @@ function App() {
                                         <Link to="/dashboard">Dashboard</Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard">Users</Link>
+                                        <Link to="/orderlist">All Orders</Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard">Orders</Link>
+                                        <Link to="/">All Products</Link>
                                     </li>
                                     <li>
                                         <Link to="/createproduct">
                                             New Product
                                         </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/">All Products</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -152,6 +150,7 @@ function App() {
                         path="/createproduct"
                         component={CreateProductScreen}
                     />
+                    <AdminRoute path="/orderlist" component={OrderListScreen} />
                 </main>
                 <footer className="row center">All right reserved</footer>
             </div>

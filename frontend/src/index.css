@@ -34,6 +34,7 @@ body {
 header {
     grid-area: header;
     background-color: none;
+    z-index: 10000;
 }
 
 header:hover {
