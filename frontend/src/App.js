@@ -2,13 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signOut } from './actions/userActions';
+import AdminRoute from './components/AdminRoute';
 import PrivateRoute from './components/PrivateRoute';
 import CartScreen from './Screens/CartScreen';
+import CreateProductScreen from './Screens/CreateProductScreen';
 import HomeScreen from './Screens/HomeScreen';
 import OrderHistoryScreen from './Screens/OrderHistoryScreen';
 import OrderScreen from './Screens/OrderScreen';
 import PaymentMethodScreen from './Screens/PaymentMethodScreen';
 import PlaceOrderScreen from './Screens/PlaceOrderScreen';
+import ProductEditScreen from './Screens/ProductEditScreen';
+import ProductListScreen from './Screens/ProductListScreen';
 import ProfileScreen from './Screens/ProfileScreen';
 import RegisterScreen from './Screens/RegisterScreen';
 import ShippingAddressScreen from './Screens/ShippingAddressScreen';
@@ -98,13 +102,18 @@ function App() {
                                         <Link to="/dashboard">Dashboard</Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard">Products</Link>
+                                        <Link to="/dashboard">Users</Link>
                                     </li>
                                     <li>
                                         <Link to="/dashboard">Orders</Link>
                                     </li>
                                     <li>
-                                        <Link to="/dashboard">Users</Link>
+                                        <Link to="/createproduct">
+                                            New Product
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/">All Products</Link>
                                     </li>
                                 </ul>
                             </div>
@@ -130,6 +139,18 @@ function App() {
                     <PrivateRoute
                         path="/orderhistory"
                         component={OrderHistoryScreen}
+                    />
+                    <AdminRoute
+                        path="/productlist"
+                        component={ProductListScreen}
+                    />
+                    <AdminRoute
+                        path="/product/:id/edit"
+                        component={ProductEditScreen}
+                    />
+                    <AdminRoute
+                        path="/createproduct"
+                        component={CreateProductScreen}
                     />
                 </main>
                 <footer className="row center">All right reserved</footer>

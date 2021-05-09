@@ -2,10 +2,18 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addToCart } from '../actions/cartActions';
+import { deleteProduct } from '../actions/productActions';
 
 export default function Product(props) {
     const { product, isAdmin } = props;
     const dispatch = useDispatch();
+
+    const deleteHandler = (product) => {
+        if (window.confirm(`Are You Sure to Delete ${product.name} ?`)) {
+            dispatch(deleteProduct(product._id));
+        }
+    };
+
     return (
         <div key={product._id} className="card">
             <img className="medium" src={product.image} alt={product.name} />
@@ -17,26 +25,35 @@ export default function Product(props) {
                 </div>
                 <div className="desc">{product.description}</div>
             </div>
-            {product.countInStock > 0 && (
-                <div className="card-add-button">
+            <div className="card-add-button">
+                {isAdmin ? (
+                    <button
+                        onClick={() => deleteHandler(product)}
+                        className="card-add-cart-button"
+                    >
+                        <i className="fa fa-trash"></i>
+                    </button>
+                ) : product.countInStock > 0 ? (
                     <button
                         onClick={() => dispatch(addToCart(product._id, 1))}
-                        disabled={isAdmin}
                         className="card-add-cart-button"
                     >
                         <i className="fa fa-shopping-bag"></i>
                     </button>
-                    <button className="card-add-buy-button">
-                        {isAdmin ? (
-                            <Link to={`/productupdate/${product._id}`}>
-                                Edit
-                            </Link>
-                        ) : (
-                            <Link to={`/cart/${product._id}`}>Buy Now</Link>
-                        )}
-                    </button>
-                </div>
-            )}
+                ) : (
+                    <div></div>
+                )}
+
+                <button className="card-add-buy-button">
+                    {isAdmin ? (
+                        <Link to={`/product/${product._id}/edit`}>Edit</Link>
+                    ) : product.countInStock > 0 ? (
+                        <Link to={`/cart/${product._id}`}>Buy Now</Link>
+                    ) : (
+                        <div></div>
+                    )}
+                </button>
+            </div>
         </div>
     );
 }
