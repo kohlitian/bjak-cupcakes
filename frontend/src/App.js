@@ -50,14 +50,16 @@ function App() {
                         </Link>
                     </div>
                     <div>
-                        <Link to="/cart">
-                            Cart{' '}
-                            {cartItems.length > 0 && (
-                                <span className="badge">
-                                    {cartItems.length}
-                                </span>
-                            )}
-                        </Link>
+                        {userInfo && !userInfo.isAdmin && (
+                            <Link to="/cart">
+                                Cart{' '}
+                                {cartItems.length > 0 && (
+                                    <span className="badge">
+                                        {cartItems.length}
+                                    </span>
+                                )}
+                            </Link>
+                        )}
                         {userInfo ? (
                             <div className="dropdown">
                                 <Link to="#">

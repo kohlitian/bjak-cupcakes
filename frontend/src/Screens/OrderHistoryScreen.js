@@ -26,7 +26,7 @@ export default function OrderHistoryScreen(props) {
                 </MessageBox>
             ) : (
                 orders.map((order) => (
-                    <div className="row top">
+                    <div key={order._id} className="row top">
                         <div className="col-2">
                             <div className="card ">
                                 <div
@@ -36,8 +36,8 @@ export default function OrderHistoryScreen(props) {
                                     <h1>{order._id}</h1>
 
                                     <ul>
-                                        <li key={order._id}>
-                                            {order.orderItems.map((item) => (
+                                        {order.orderItems.map((item) => (
+                                            <li key={item._id}>
                                                 <div className="row">
                                                     <div>
                                                         <img
@@ -57,8 +57,8 @@ export default function OrderHistoryScreen(props) {
                                                         {item.price * item.qty}
                                                     </div>
                                                 </div>
-                                            ))}
-                                        </li>
+                                            </li>
+                                        ))}
                                     </ul>
                                 </div>
                                 <div

@@ -11,6 +11,9 @@ export default function PlaceOrderScreen(props) {
     if (!cart.paymentMethod) {
         props.history.push('/payment');
     }
+    if (cart.cartItems.length === 0) {
+        props.history.push('/');
+    }
     const orderCreate = useSelector((state) => state.orderCreate);
     const { success, loading, order, error } = orderCreate;
     const toPrice = (num) => Number(num.toFixed(2));

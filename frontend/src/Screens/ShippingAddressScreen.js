@@ -10,10 +10,13 @@ export default function ShippingAddressScreen(props) {
     if (!userInfo) {
         props.history.push('/signin');
     }
+    if (cart.cartItems.length === 0) {
+        props.history.push('/');
+    }
 
     const [fullName, setFullName] = useState(
-        userInfo?.fullName
-            ? userInfo.fullName
+        userInfo?.name
+            ? userInfo.name
             : cart.shippingAddress?.fullName
             ? cart.shippingAddress.fullName
             : ''

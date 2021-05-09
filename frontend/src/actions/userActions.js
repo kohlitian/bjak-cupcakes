@@ -91,7 +91,6 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
         userSignin: { userInfo },
     } = getState();
     try {
-        console.log(user);
         const { data } = await Axios.put(`/api/users/profile`, user, {
             headers: { authorization: `Bearer ${userInfo.token}` },
         });
