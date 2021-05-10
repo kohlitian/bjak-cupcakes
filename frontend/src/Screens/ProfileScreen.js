@@ -14,6 +14,7 @@ export default function ProfileScreen() {
     const [address, setAddress] = useState('');
     const [postalCode, setPostalCode] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [phone, setPhone] = useState('');
 
     const userSignin = useSelector((state) => state.userSignin);
     const { userInfo } = userSignin;
@@ -39,6 +40,7 @@ export default function ProfileScreen() {
             setCity(user.city ? user.city : '');
             setCountry(user.country ? user.country : '');
             setPostalCode(user.postalCode ? user.postalCode : '');
+            setPhone(user.phone ? user.phone : '');
         }
     }, [dispatch, userInfo, user]);
 
@@ -52,6 +54,7 @@ export default function ProfileScreen() {
                     userId: user._id,
                     name,
                     email,
+                    phone,
                     password,
                     address,
                     city,
@@ -103,6 +106,16 @@ export default function ProfileScreen() {
                                 placeholder="Enter Email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="phone">Phone</label>
+                            <input
+                                type="text"
+                                id="phone"
+                                placeholder="Enter Phone"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
                             />
                         </div>
                         <div>

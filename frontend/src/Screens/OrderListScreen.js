@@ -83,24 +83,59 @@ export default function OrderListScreen() {
                                             className="row"
                                             style={{ marginBottom: '2rem' }}
                                         >
-                                            <div>
-                                                <i className="fa fa-user"></i>:{' '}
+                                            <div
+                                                style={{
+                                                    fontSize: '1.8rem',
+                                                    color: '#686ab1',
+                                                }}
+                                            >
+                                                <i
+                                                    style={{
+                                                        marginRight: '1rem',
+                                                    }}
+                                                    className="fa fa-user"
+                                                ></i>
                                                 {order.user.name}
                                             </div>
-                                            <div>
-                                                <i className="fa fa-envelope"></i>
-                                                : {order.user.email}
+                                            <div
+                                                style={{
+                                                    fontSize: '1.8rem',
+                                                    color: '#686ab1',
+                                                }}
+                                            >
+                                                <i
+                                                    style={{
+                                                        marginRight: '1rem',
+                                                    }}
+                                                    className="fa fa-envelope"
+                                                ></i>
+                                                {order.user.email}
                                             </div>
-                                            <div>
-                                                <i className="fa fa-phone"></i>:
-                                                0163333344{order.user.phone}
+                                            <div
+                                                style={{
+                                                    fontSize: '1.8rem',
+                                                    color: '#686ab1',
+                                                }}
+                                            >
+                                                <i
+                                                    style={{
+                                                        marginRight: '1rem',
+                                                    }}
+                                                    className="fa fa-phone"
+                                                ></i>
+                                                {order.user.phone}
                                             </div>
                                         </div>
                                         <div
                                             className="row"
                                             style={{ marginBottom: '1rem' }}
                                         >
-                                            <div>
+                                            <div
+                                                style={{
+                                                    fontSize: '1.8rem',
+                                                    color: '#686ab1',
+                                                }}
+                                            >
                                                 {order.shippingAddress.address},{' '}
                                                 {order.shippingAddress.city},{' '}
                                                 {

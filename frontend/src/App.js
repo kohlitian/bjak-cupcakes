@@ -3,9 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { BrowserRouter, Link, Route } from 'react-router-dom';
 import { signOut } from './actions/userActions';
 import AdminRoute from './components/AdminRoute';
+import ChatBox from './components/ChatBox';
 import PrivateRoute from './components/PrivateRoute';
 import CartScreen from './Screens/CartScreen';
 import CreateProductScreen from './Screens/CreateProductScreen';
+import DashboardScreen from './Screens/DashboardScreen';
 import HomeScreen from './Screens/HomeScreen';
 import OrderHistoryScreen from './Screens/OrderHistoryScreen';
 import OrderListScreen from './Screens/OrderListScreen';
@@ -18,6 +20,7 @@ import ProfileScreen from './Screens/ProfileScreen';
 import RegisterScreen from './Screens/RegisterScreen';
 import ShippingAddressScreen from './Screens/ShippingAddressScreen';
 import SigninScreen from './Screens/SigninScreen';
+import SupportScreen from './Screens/SupportScreen';
 
 function App() {
     const [headerActive, setHeaderActive] = useState('');
@@ -113,6 +116,9 @@ function App() {
                                             New Product
                                         </Link>
                                     </li>
+                                    <li>
+                                        <Link to="/support">Support</Link>
+                                    </li>
                                 </ul>
                             </div>
                         )}
@@ -151,8 +157,15 @@ function App() {
                         component={CreateProductScreen}
                     />
                     <AdminRoute path="/orderlist" component={OrderListScreen} />
+                    <AdminRoute path="/dashboard" component={DashboardScreen} />
+                    <AdminRoute path="/support" component={SupportScreen} />
                 </main>
-                <footer className="row center">All right reserved</footer>
+                <footer className="row center">
+                    {userInfo && !userInfo.isAdmin && (
+                        <ChatBox userInfo={userInfo} />
+                    )}
+                    All Right Reserved
+                </footer>
             </div>
         </BrowserRouter>
     );

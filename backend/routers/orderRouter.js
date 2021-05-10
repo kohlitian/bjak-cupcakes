@@ -1,6 +1,8 @@
 import express from 'express';
 import expressAsyncHandler from 'express-async-handler';
 import Order from '../models/orderModel.js';
+import User from '../models/userModel.js';
+import Product from '../models/productModel.js';
 import { isAdmin, isAuth, mailgun, payOrderEmailTemplate } from '../utils.js';
 
 const orderRouter = express.Router();
@@ -17,6 +19,63 @@ orderRouter.get(
             .populate('user', 'name email phone')
             .sort({ createdAt: 1 });
         res.send(orders);
+    })
+);
+
+orderRouter.get(
+    '/summary',
+    isAuth,
+    isAdmin,
+    expressAsyncHandler(async (req, res) => {
+        const orders = await Order.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    numOrders: {
+                        $sum: 1,
+                    },
+                    totalSales: {
+                        $sum: '$totalPrice',
+                    },
+                },
+            },
+        ]);
+        const users = await User.aggregate([
+            {
+                $group: {
+                    _id: null,
+                    numUsers: { $sum: 1 },
+                },
+            },
+        ]);
+        const dailyOrders = await Order.aggregate([
+            {
+                $group: {
+                    _id: {
+                        $dateToString: {
+                            format: '%Y-%m-%d',
+                            date: '$createdAt',
+                        },
+                    },
+                    orders: { $sum: 1 },
+                    sales: { $sum: '$totalPrice' },
+                },
+            },
+            {
+                $sort: {
+                    _id: 1,
+                },
+            },
+        ]);
+        const productCategories = await Product.aggregate([
+            {
+                $group: {
+                    _id: '$category',
+                    count: { $sum: 1 },
+                },
+            },
+        ]);
+        res.send({ users, orders, dailyOrders, productCategories });
     })
 );
 
@@ -89,6 +148,20 @@ orderRouter.put(
                 email_address: req.body.email_address,
             };
             const updatedOrder = await order.save();
+
+            order.orderItems.map((order) => {
+                Product.findByIdAndUpdate(
+                    { _id: order.product },
+                    { $inc: { countInStock: -order.qty } },
+                    (err, data) => {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log(data);
+                        }
+                    }
+                );
+            });
             mailgun()
                 .messages()
                 .send(
