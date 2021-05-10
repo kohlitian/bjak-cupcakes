@@ -52,7 +52,9 @@ export default function Product(props) {
                     ) : product.countInStock > 0 ? (
                         <Link to={`/cart/${product._id}`}>Buy Now</Link>
                     ) : (
-                        <Link to="#">Out of Stock</Link>
+                        <Link to="#" className="disable-link">
+                            Out of Stock
+                        </Link>
                     )}
                 </button>
             </div>
